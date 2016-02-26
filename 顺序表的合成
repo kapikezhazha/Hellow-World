@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAXSIZE 21
+typedef int DataType;
+typedef struct 
+{
+	DataType data[MAXSIZE];
+	int length;
+}Sqlist;
+
+void InitList(Sqlist &l)
+{
+	l.length=0;
+}
+
+int locationsqlist(Sqlist &l,DataType x)
+{   
+	int y;
+	for(y=l.length;y>1;y--)
+	{
+	   if(l.data[y]<=x)
+		   return (y+1);
+	}
+	return(1);
+}
+
+void insertlist(Sqlist &l,int i,DataType x)
+{
+	  int b=l.length;
+	  if(l.length=MAXSIZE)
+	  {
+		  printf("\n顺序表是满的，无法合成");
+		  exit(1);
+	  }
+	  if(i>l.length)
+		  l.data[b+1]=x;
+	  else
+	  {
+		  int j;
+		  for(j=l.length;j>i;j--)
+			  l.data [j+1]=l.data [j];
+		  l.data[i]=x;
+		  l.length++;
+	  }
+
+}
+
+void main()
+{
+	Sqlist a,b;
+	int i;
+	int j;
+	a.length=b.length=10;
+	printf("输入10个数\n");
+	for(i=0;i<10;i++)
+	{
+       scanf("%DataType  ",&a.data[i]);
+	}
+
+	printf("输入10个数\n");
+	for(i=0;i<10;i++)
+	{
+       scanf("%DataType  ",&b.data[i]);
+	}
+	InitList(a);
+	InitList(b);
+	for(i=0;i<10;i++)
+	{
+	  j=locationsqlist(a,b.data[i]);
+	  insertlist(a,j,b.data[i]);
+	}
+    for(i=0;i<10;i++)
+		printf("%DataType",a.data[i]);
+}
